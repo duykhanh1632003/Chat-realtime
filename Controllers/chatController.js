@@ -6,8 +6,8 @@ const createChat = async (req, res) => {
     const chat = await chatModel.findOne({
       members: { $all: [firstId, secondId] },
     });
-
-    if (chat) return res.status(200).json(chat);
+    console.log("check chat",chat)
+    if (chat) return res.status(200).json({ errCode: 1 });
 
     const newChat = new chatModel({
       members: [firstId, secondId],
@@ -15,10 +15,7 @@ const createChat = async (req, res) => {
 
     const response = await newChat.save();
 
-    res.status(200).json({
-      errCode: 0,
-      response,
-    });
+    res.status(200).json(response);
   } catch (e) {
     console.log(e);
     res.status(500).json({

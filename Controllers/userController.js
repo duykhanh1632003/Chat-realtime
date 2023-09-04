@@ -93,10 +93,16 @@ const getUsers = async (req, res) => {
   try {
     const user = await userModel.find();
 
-    res.status(200).json(user);
+    res.status(200).json({
+      user,
+      errCode: 0
+    });
   } catch (e) {
     console.log(e);
-    res.status(500).json(e);
+    res.status(500).json({
+      errCode: 1,
+      errMessage:"Missing required parameter"
+    });
   }
 };
 
