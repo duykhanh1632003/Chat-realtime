@@ -10,7 +10,6 @@ const Login = () => {
         updateLoginInfo,
     isLoginLoading } = useContext(AuthContext)
   
-  console.log("checkkkk", loginError)
 
   return (
     <>

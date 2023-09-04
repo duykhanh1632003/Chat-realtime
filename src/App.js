@@ -9,13 +9,13 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import { AuthContext } from "./contex/AuthContext";
 import { useContext } from "react";
+import { ChatContextProvider } from "./contex/ChatContext";
 
 function App() {
   const { user } = useContext(AuthContext);
-  console.log("check user", user);
 
   return (
-    <>
+    <ChatContextProvider user = {user}>
       <NavBar />
       <Container className="text-secondary">
         <Routes>
@@ -34,7 +34,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
-    </>
+    </ChatContextProvider>
   );
 }
 

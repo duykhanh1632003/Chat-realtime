@@ -1,10 +1,14 @@
+.container{
+	color: white !important;
+}
+
 
 #root {
   color: white !important;
   background: rgb(40,40,40);
   font-family: 'Nunito Sans', sans-serif;
   font-family: 'Roboto', sans-serif;
-  height: 150%;
+  height: 100%;
 }
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
 
@@ -71,6 +75,8 @@ body {
   overflow-y: auto;
   background: rgb(25, 25, 25);
   border-radius: 10px;
+  height: 1300px;
+  display: block;
 }
 
 .messages-box {

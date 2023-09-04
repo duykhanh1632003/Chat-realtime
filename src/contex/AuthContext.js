@@ -48,9 +48,9 @@ export const AuthContextProvider = ({ children }) => {
       setIsRegisterLoading(false);
 
       if (response.errCode === 1) {
-        console.log("check res", response);
         return setRegisterError(response); // Save error message
       }
+      localStorage.setItem("islogin",true)
       localStorage.setItem("User", JSON.stringify(response));
       setUser(response);
     },
@@ -65,9 +65,9 @@ export const AuthContextProvider = ({ children }) => {
       const response = await postRequest(`${baseUrl}/users/login`, loginInfo);
       setIsLoginLoading(false);
       if (response.errCode === 1) {
-        console.log("check res", response);
         return setLoginError(response); // Save error message
       }
+      localStorage.setItem("islogin", true);
       localStorage.setItem("User", JSON.stringify(response));
       setUser(response)
       
@@ -75,7 +75,6 @@ export const AuthContextProvider = ({ children }) => {
     [loginInfo]
   );
 
-  console.log("Check logininfor",loginInfo )
 
   const logoutUser = useCallback(() => {
     localStorage.removeItem("User");

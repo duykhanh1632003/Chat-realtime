@@ -1,11 +1,18 @@
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../contex/AuthContext";
+import Notification from "./chat/Notification";
 const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
-  console.log("check user", user);
+  const [isLogined, setIsLogined] = useState(false);
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem("islogin");
+    setIsLogined(isLogin === "true");
+  }, []);
+
   return (
     <Navbar bg="dark" className="mb-4" style={{ height: "3.75rem" }}>
       <Container>
@@ -16,12 +23,15 @@ const NavBar = () => {
         </h1>
         <span className="text-warning">
           {user && user.errCode === 0
-            ? `Logeed in as ${user.name}`
+            ? `Logged in as ${user.name}`
             : "Welcome to my chat App"}
         </span>
         <Nav>
           <Stack direction="horizontal" gap={3}>
-            {(user && user.errCode === 1) || !user && (
+            {(!isLogined ||
+              user?.errCode === 1 ||
+              user == null ||
+              user?.errCode == null) && (
               <>
                 <Link
                   to="/login"
@@ -37,8 +47,9 @@ const NavBar = () => {
                 </Link>
               </>
             )}
-            {user && user.errCode === 0 && (
+            {isLogined && user?.errCode === 0 && (
               <>
+                <Notification />
                 <Link
                   onClick={() => logoutUser()}
                   to="/login"
